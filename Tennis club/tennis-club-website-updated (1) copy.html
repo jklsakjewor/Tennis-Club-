@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tennis Club</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            background-image: url('1-e60b6d05.jpg');
+            background-size: cover;
+            background-position: center 70%; /* Shifted down by 20% */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        nav {
+            background-color: #f1f1f1;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        nav a {
+            margin: 0 1rem;
+            text-decoration: none;
+            color: #333;
+        }
+        #member-policy {
+            padding: 1rem;
+            margin: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .card {
+            padding: 0.5rem 1rem; /* Reduced vertical padding */
+            margin: 0.75rem auto; /* Reduced margins */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #ffffff; /* Changed to white */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Lighter shadow */
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transform: translateY(-1px);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-header h2 {
+            margin: 0;
+            color: #333;
+            border-bottom: none;
+            font-size: 1.3rem; /* Smaller heading */
+            padding: 0.3rem 0; /* Less padding */
+        }
+        
+        .card-content {
+            display: none;
+            padding-top: 0.75rem;
+            border-top: 1px solid #ddd;
+            margin-top: 0.75rem;
+        }
+        
+        .card-content h3 {
+            color: #333;
+            margin: 0.75rem 0 0.25rem 0;
+            font-size: 1.1rem;
+        }
+        
+        .card-content.active {
+            display: block;
+        }
+        
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+        
+        .arrow.active {
+            transform: rotate(180deg);
+        }
+        
+        h2 {
+            color: #4CAF50;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.5rem;
+        }
+        main {
+            padding: 1rem;
+            margin-bottom: 70px; /* Space for footer */
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        header {
+    height: 250px; /* Directly set the height */
+}
+header h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tennis Club</h1>
+    </header>
+    
+    <!-- Navigation removed as requested -->
+    
+    <main>
+        <div class="card" id="basic-info-card" onclick="toggleCard('basic-info')">
+            <div class="card-header">
+                <h2>Basic Information</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="card-content" id="basic-info-content">
+                <p style="margin: 0.25rem 0;"><strong>Time:</strong> Day 2</p>
+                <p style="margin: 0.25rem 0;"><strong>Location:</strong> CIS Tennis Court</p>
+                <p style="margin: 0.25rem 0;"><strong>Contact:</strong> hani2029@cis.edu.sg, spwe2031@cis.edu.sg</p>
+            </div>
+        </div>
+        
+        <div class="card" id="member-policy-card" onclick="toggleCard('member-policy')">
+            <div class="card-header">
+                <h2>Member Policy</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="card-content" id="member-policy-content">
+                <h3>Absence</h3>
+                <p style="margin: 0.25rem 0;">1. All participants must send an <strong>email</strong> (not google chat)</p>
+                <p style="margin: 0.25rem 0 0.25rem 1.5rem;">when unable to attend a meeting.</p>
+                <p style="margin: 0.25rem 0;">2. If a participant misses two meetings without sending a single email,</p>
+                <p style="margin: 0.25rem 0 0.25rem 1.5rem;">they will receive an warning.</p>
+                <p style="margin: 0.25rem 0;">3. If a participant misses three meetings without sending any emails,</p>
+                <p style="margin: 0.25rem 0 0.25rem 1.5rem;">they will be removed from the group.</p>
+            </div>
+        </div>
+    </main>
+    
+    
+    
+    <script>
+        function toggleCard(id) {
+            const content = document.getElementById(id + '-content');
+            const arrow = document.querySelector('#' + id + '-card .arrow');
+            
+            content.classList.toggle('active');
+            arrow.classList.toggle('active');
+        }
+        
+        function toggleUploadForm() {
+            const uploadContainer = document.getElementById('upload-container');
+            if (uploadContainer.style.display === 'none') {
+                uploadContainer.style.display = 'block';
+                document.getElementById('toggle-upload').textContent = 'Hide Upload Form';
+            } else {
+                uploadContainer.style.display = 'none';
+                document.getElementById('toggle-upload').textContent = 'Upload Background Image';
+            }
+        }
+        
+        function applyBackgroundImage() {
+            const fileInput = document.getElementById('image-upload');
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    document.querySelector('header').style.backgroundImage = `url(${e.target.result})`;
+                    document.querySelector('header').style.backgroundSize = 'cover';
+                    document.querySelector('header').style.backgroundPosition = 'center';
+                    
+                    // Hide both the upload form and the toggle button
+                    document.getElementById('upload-container').style.display = 'none';
+                    document.getElementById('toggle-upload').style.display = 'none';
+                };
+                
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                alert('Please select an image first.');
+            }
+        }
+    </script>
+</body>
+</html>
